@@ -7,7 +7,6 @@ import Home from './HomeComponent';
  
 
 const MenuNavigator = createStackNavigator({
-    Home: { screen: Home },
     Menu: { screen: Menu },
     DishDetail: { screen: DishDetail }
 },
