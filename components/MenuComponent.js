@@ -30,7 +30,7 @@ class Menu extends Component {
                     subtitle={item.description}
                     />
             );
-        }
+        };
         return (
             <FlatList
                 data={this.state.dishes}
