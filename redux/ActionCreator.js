@@ -1,10 +1,10 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
-export const fetchComments = (dispatch) => {
+export const fetchComments = () => (dispatch) => {
     return fetch(baseUrl + 'comments')
         .then(response => {
-            if (respones.ok) {
+            if (response.ok) {
                 return response;
             } else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText)
@@ -34,11 +34,11 @@ export const addComments = (comments)  => ({
 
 
 
-export const fetchDishes = (dispatch) => {
+export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading())
     return fetch(baseUrl + 'dishes')
         .then(response => {
-            if (respones.ok) {
+            if (response.ok) {
                 return response;
             } else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText)
@@ -72,11 +72,11 @@ export const addDishes = (dishes)  => ({
 
 
 
-export const fetchPromos = (dispatch) => {
+export const fetchPromos = () => (dispatch) => {
     dispatch(promosLoading())
     return fetch(baseUrl + 'promotions')
         .then(response => {
-            if (respones.ok) {
+            if (response.ok) {
                 return response;
             } else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText)
@@ -108,11 +108,11 @@ export const addPromos = (promos)  => ({
 
 
 
-export const fetchLeader = (dispatch) => {
+export const fetchLeaders = () => (dispatch) => {
     dispatch(leadersLoading())
     return fetch(baseUrl + 'leaders')
         .then(response => {
-            if (respones.ok) {
+            if (response.ok) {
                 return response;
             } else {
                 var error = new Error('Error' + response.status + ': ' + response.statusText)

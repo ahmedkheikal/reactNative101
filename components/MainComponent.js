@@ -8,8 +8,17 @@ import Contact from './ContactComponent';
 import { Icon } from 'react-native-elements';
 import { ScrollView, SafeAreaView, StyleSheet, View, Image, Text } from 'react-native';
 import { Dimensions, TouchableHighlight } from 'react-native';
+import { fetchPromos, fetchComments, fetchDishes, fetchLeaders } from '../redux/ActionCreator';
+import { connect } from 'react-redux';
 
 
+const mapStateToProps = state => ({ });
+const mapDispatchToProps = dispatch => ({
+    fetchDishes: () => dispatch(fetchDishes()),
+    fetchComments: () => dispatch(fetchComments()),
+    fetchPromos: () => dispatch(fetchPromos()),
+    fetchLeaders: () => dispatch(fetchLeaders()),
+})
 
 const MenuNavigator = createStackNavigator({
     Menu: {
@@ -176,8 +185,15 @@ function CustomDrawerContentComponent(props) {
         </ScrollView>
     );
 }
-export default class Main extends Component {
+class Main extends Component {
 
+    componentDidMount() {
+        this.props.fetchDishes();
+        this.props.fetchComments();
+
+        this.props.fetchLeaders();
+        this.props.fetchPromos();
+    }
     render() {
         return (
             <MainNavigator style={{flex: 1}} />
@@ -206,3 +222,4 @@ const styles = StyleSheet.create({
         height: 60
     }
 });
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

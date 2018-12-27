@@ -10,13 +10,13 @@ export const dishes = (
 ) => {
     switch (action.type) {
         case ActionTypes.ADD_DISHES:
-            return {...stete, isLoading: false, errMess: null, dishes: action.payload};
+            return {...state, isLoading: false, errMess: null, dishes: action.payload};
 
         case ActionTypes.DISHES_LOADING:
-            return {...stete, isLoading: true, errMess: null, dishes: []};
+            return {...state, isLoading: true, errMess: null, dishes: []};
 
         case ActionTypes.DISHES_FAILED:
-            return {...stete, isLoading: false, errMess: action.payload, dishes: []};
+            return {...state, isLoading: false, errMess: action.payload, dishes: []};
 
         default:
             return state;
