@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
-import { Card } from 'react-native-elements';
+import { ScrollView, View } from 'react-native';
+import { Card, Text } from 'react-native-elements';
 import { baseUrl } from '../shared/baseUrl';
 import { connect } from 'react-redux';
+import { Loading } from './LoadingComponent';
 
 const mapStateToProps = state => {
     return {
         dishes: state.dishes,
         promotions: state.promotions,
         leaders: state.leaders,
+        isLoading: state.leaders.isLoading
     }
 }
 function RenderItem(props) {
@@ -31,6 +33,18 @@ class Home extends Component {
         title: 'Home'
     }
     render() {
+        if (this.props.isLoading) 
+        return (<Loading />);
+        else if (this.props.leaders.errMess)
+        return (
+            <View style={{ justifyContent: 'center', flex: 1 }}>
+                <Text style={{
+                    textAlign: 'center',
+                    justifyContent: 'center',
+                    fontSize: 20
+                }}>{this.props.leaders.errMess}</Text>
+            </View>
+        )
         return (
             <ScrollView>
                 <RenderItem

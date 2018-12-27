@@ -3,6 +3,7 @@ import { Card, Text, Divider, ListItem } from 'react-native-elements';
 import { ScrollView, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
 
 const mapStateToProps = state => {
     return {
@@ -32,6 +33,11 @@ class About extends Component {
                     />
             );
         };
+
+        if (this.props.isLoading == true) 
+        return <Loading />
+            
+            
         return (
             <ScrollView>
                 <Card
