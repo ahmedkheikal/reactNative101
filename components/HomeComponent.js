@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Alert, PanResponder } from 'react-native';
 import { Card, Text } from 'react-native-elements';
 import { baseUrl } from '../shared/baseUrl';
 import { connect } from 'react-redux';
@@ -14,11 +14,31 @@ const mapStateToProps = state => {
         isLoading: state.leaders.isLoading
     }
 }
+
+const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
+    if (dx < -200)
+    return true;
+
+};
+const panResponder = PanResponder.create({
+    onStartShouldSetPanResponder: (e, gestureState) => {
+        return true;
+    },
+    onPanResponderEnd: (e, gestureState) => {
+        if (recognizeDrag(gestureState))
+        Alert.alert('gesture recognized')
+        return true;
+
+    }
+});
+
 function RenderItem(props) {
     const item = props.item;
     if (item !== null && item !== undefined)
     return (
-        <Animatable.View animation="fadeInDown">
+        <Animatable.View
+            animation="fadeInDown"
+            {...panResponder.panHandlers}>
             <Card
                 featuredTitle={item.name}
                 featuredSubtitle={item.designation}
