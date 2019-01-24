@@ -7,9 +7,10 @@ import About from './AboutComponent';
 import Contact from './ContactComponent';
 import { Icon } from 'react-native-elements';
 import { ScrollView, SafeAreaView, StyleSheet, View, Image, Text } from 'react-native';
-import { Dimensions, TouchableHighlight } from 'react-native';
+import { Dimensions } from 'react-native';
 import { fetchPromos, fetchComments, fetchDishes, fetchLeaders } from '../redux/ActionCreator';
 import { connect } from 'react-redux';
+import Reservation from './ReservationComponent';
 
 
 const mapStateToProps = state => ({ });
@@ -46,6 +47,25 @@ const ContactNavigator = createStackNavigator({
 },
 {
     initialRouteName: 'Contact',
+    navigationOptions: ({ navigation }) => ({
+        headerStyle: {
+            backgroundColor: "#512DA8"
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+            color: "#fff"
+        },
+        headerLeft: <Icon name='menu' size={24} color={'white'} onPress={() => navigation.toggleDrawer()} />
+
+})
+}
+);
+
+const ReservationtNavigator = createStackNavigator({
+    Reservation: { screen: Reservation }
+},
+{
+    initialRouteName: 'Reservation',
     navigationOptions: ({ navigation }) => ({
         headerStyle: {
             backgroundColor: "#512DA8"
@@ -149,6 +169,20 @@ const MainNavigator = createDrawerNavigator({
             drawerIcon: ({ tintColor }) =>
             <Icon
                 name='address-card'
+                type='font-awesome'
+                size={24}
+                color={tintColor}
+                />
+        }
+    },
+    Reservation: {
+        screen: ReservationtNavigator,
+        navigationOptions: {
+            title: 'Reserve Table',
+            drawerLabel: 'Reserve Table',
+            drawerIcon: ({ tintColor }) =>
+            <Icon
+                name='cutlery'
                 type='font-awesome'
                 size={24}
                 color={tintColor}

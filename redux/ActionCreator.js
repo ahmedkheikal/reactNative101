@@ -11,7 +11,7 @@ export const fetchComments = () => (dispatch) => {
                 error.response = response;
                 throw error;
             }
-        }, 
+        },
         error => {
             throw new Error(error.message)
         })
@@ -45,7 +45,7 @@ export const fetchDishes = () => (dispatch) => {
                 error.response = response;
                 throw error;
             }
-        }, 
+        },
         error => {
             throw new Error(error.message)
         })
@@ -83,7 +83,7 @@ export const fetchPromos = () => (dispatch) => {
                 error.response = response;
                 throw error;
             }
-        }, 
+        },
         error => {
             throw new Error(error.message)
         })
@@ -119,7 +119,7 @@ export const fetchLeaders = () => (dispatch) => {
                 error.response = response;
                 throw error;
             }
-        }, 
+        },
         error => {
             throw new Error(error.message)
         })
