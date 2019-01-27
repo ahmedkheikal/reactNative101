@@ -19,14 +19,15 @@ class About extends Component {
     render() {
         const RenderLeader = ({item, index}) => {
             // onPress={() => navigate('DishDetail', { dishId: item.id })}
-            
+
             return (
+
                 <ListItem
                     key={index}
                     avatar={{uri: baseUrl + item.image}}
                     roundAvatar={true}
                     title={item.name}
-                    subtitle={
+                      subtitle={
                         <Text style={{paddingLeft: 15, color: '#999'}}>{item.description}</Text>
                     }
                     hideChevron={true}
@@ -34,10 +35,10 @@ class About extends Component {
             );
         };
 
-        if (this.props.isLoading == true) 
+        if (this.props.isLoading == true)
         return <Loading />
-            
-            
+
+
         return (
             <ScrollView>
                 <Card

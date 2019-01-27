@@ -5,6 +5,7 @@ import { baseUrl } from '../shared/baseUrl';
 import { connect } from 'react-redux';
 import { Loading } from './LoadingComponent';
 import * as Animatable from 'react-native-animatable';
+import { Login } from './LoginComponent';
 
 const mapStateToProps = state => {
     return {
@@ -20,9 +21,13 @@ const recognizeDrag = ({ moveX, moveY, dx, dy }) => {
     return true;
 
 };
+
 const panResponder = PanResponder.create({
     onStartShouldSetPanResponder: (e, gestureState) => {
         return true;
+    },
+    onPanResponderGrant: () => {
+        GlobalView.rubberBand(2000);
     },
     onPanResponderEnd: (e, gestureState) => {
         if (recognizeDrag(gestureState))
@@ -31,6 +36,10 @@ const panResponder = PanResponder.create({
 
     }
 });
+var GlobalView = null;
+const handleRef = (ref) => {
+    GlobalView = ref;
+};
 
 function RenderItem(props) {
     const item = props.item;
@@ -38,6 +47,7 @@ function RenderItem(props) {
     return (
         <Animatable.View
             animation="fadeInDown"
+            ref={handleRef}
             {...panResponder.panHandlers}>
             <Card
                 featuredTitle={item.name}
@@ -65,22 +75,23 @@ class Home extends Component {
                         textAlign: 'center',
                         justifyContent: 'center',
                         fontSize: 20
-                    }}>{this.props.leaders.errMess}</Text>
-                </View>
-            )
-            return (
-                <ScrollView>
-                    <RenderItem
-                        item={this.props.dishes.dishes.filter(dish => dish.featured == true)[0] }
-                        />
-                    <RenderItem
-                        item={this.props.promotions.promotions.filter(promotion => promotion.featured == true)[0] }
-                        />
-                    <RenderItem
-                        item={this.props.leaders.leaders.filter(leader => leader.featured == true)[0] }
-                        />
-                </ScrollView>
-            )
-        }
+                    }}>{this.props.leaders.errMess}
+                </Text>
+            </View>
+        )
+        return (
+            <ScrollView>
+                <RenderItem
+                    item={this.props.dishes.dishes.filter(dish => dish.featured == true)[0] }
+                    />
+                <RenderItem
+                    item={this.props.promotions.promotions.filter(promotion => promotion.featured == true)[0] }
+                    />
+                <RenderItem
+                    item={this.props.leaders.leaders.filter(leader => leader.featured == true)[0] }
+                    />
+            </ScrollView>
+        )
     }
-    export default connect(mapStateToProps)(Home);
+}
+export default connect(mapStateToProps)(Home);

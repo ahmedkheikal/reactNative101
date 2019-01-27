@@ -11,7 +11,7 @@ import { Dimensions } from 'react-native';
 import { fetchPromos, fetchComments, fetchDishes, fetchLeaders } from '../redux/ActionCreator';
 import { connect } from 'react-redux';
 import Reservation from './ReservationComponent';
-
+import Login from './LoginComponent';
 
 const mapStateToProps = state => ({ });
 const mapDispatchToProps = dispatch => ({
@@ -20,6 +20,23 @@ const mapDispatchToProps = dispatch => ({
     fetchPromos: () => dispatch(fetchPromos()),
     fetchLeaders: () => dispatch(fetchLeaders()),
 })
+
+const LoginNavigator = createStackNavigator({
+    Login: { screen: Login }
+  }, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name="menu" size={24}
+      iconStyle={{ color: 'white' }}
+      onPress={ () => navigation.toggleDrawer() } />
+  })
+});
 
 const MenuNavigator = createStackNavigator({
     Menu: {
@@ -119,6 +136,20 @@ const HomeNavigator = createStackNavigator({
 );
 
 const MainNavigator = createDrawerNavigator({
+    Login: { screen: LoginNavigator,
+        navigationOptions: {
+            title: 'Login',
+            drawerLabel: 'Login',
+            drawerIcon: ({ tintColor, focused }) => (
+                <Icon
+                    name='sign-in'
+                    type='font-awesome'
+                    size={24}
+                    iconStyle={{ color: tintColor }}
+                    />
+            ),
+        }
+    },
     Home: {
         screen: HomeNavigator,
         navigationOptions: {
